@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #FAF8EF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MenuController">
+   <children>
+      <Pane layoutX="121.0" layoutY="31.0" prefHeight="261.0" prefWidth="261.0" style="-fx-background-color: #BBAEA1;" />
+      <Label fx:id="size" alignment="CENTER" layoutX="196.0" layoutY="328.0" prefHeight="64.0" prefWidth="110.0" text="4x4" textAlignment="CENTER" textFill="#776e65">
+         <font>
+            <Font name="System Bold" size="43.0" />
+         </font>
+      </Label>
+      <Button graphicTextGap="10.0" layoutX="154.0" layoutY="494.0" mnemonicParsing="false" onAction="#startGame" prefHeight="50.0" prefWidth="194.0" style="-fx-background-color: #F87F5F;" text="Начать игру" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="next" layoutX="291.0" layoutY="301.0" mnemonicParsing="false" onAction="#next" prefHeight="118.0" prefWidth="110.0" rotate="180.0" style="-fx-background-color: rgba(0,0,0,0);">
+         <graphic>
+            <ImageView fitHeight="110.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_chevron_left_96px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="previous" layoutX="96.0" layoutY="301.0" mnemonicParsing="false" onAction="#previous" prefHeight="118.0" prefWidth="110.0" style="-fx-background-color: rgba(0,0,0,0);">
+         <graphic>
+            <ImageView fitHeight="110.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_chevron_left_96px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="mode" alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="402.0" prefHeight="64.0" prefWidth="167.0" text="PLAYER" textAlignment="CENTER" textFill="#776e65">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Button fx:id="nextMode" layoutX="307.0" layoutY="393.0" mnemonicParsing="false" onAction="#nextMode" prefHeight="83.0" prefWidth="83.0" rotate="180.0" style="-fx-background-color: rgba(0,0,0,0);">
+         <graphic>
+            <ImageView fitHeight="110.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_chevron_left_96px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="previousMode" layoutX="115.0" layoutY="399.0" mnemonicParsing="false" onAction="#previousMode" prefHeight="70.0" prefWidth="50.0" style="-fx-background-color: rgba(0,0,0,0);">
+         <graphic>
+            <ImageView fitHeight="110.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_chevron_left_96px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
