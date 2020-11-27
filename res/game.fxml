@@ -26,7 +26,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Button fx:id="newGame" layoutX="211.0" layoutY="111.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" style="-fx-background-color: rgba(0,0,0,0);">
+      <Button layoutX="211.0" onAction="#restart" layoutY="111.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" style="-fx-background-color: rgba(0,0,0,0);">
          <font>
             <Font name="System Bold" size="1.0" />
          </font>
@@ -38,7 +38,7 @@
             </Label>
          </graphic>
       </Button>
-      <Button layoutX="344.0" layoutY="111.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" style="-fx-background-color: rgba(0,0,0,0);">
+      <Button layoutX="344.0" layoutY="111.0" onAction="#undo" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" style="-fx-background-color: rgba(0,0,0,0);">
          <font>
             <Font name="System Bold" size="1.0" />
          </font>

@@ -4,6 +4,8 @@ import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -14,7 +16,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 
 public class GameController {
 
@@ -25,6 +30,7 @@ public class GameController {
     public Pane pane;
     public Label scoreLabel;
     private Tile[][] tiles;
+    private List<Tile[][]> moveHistory;
 
     private boolean isPressed = false;
     private AI ai;
@@ -55,6 +61,8 @@ public class GameController {
 
         generateTile();
         generateTile();
+
+        moveHistory = new ArrayList<>();
 
         if(gameMode == 1) {
             ai = new AI(size);
@@ -148,6 +156,7 @@ public class GameController {
     }
 
     private Transition moveLeft() {
+        saveField();
         ParallelTransition par = new ParallelTransition();
         for (int i = 0; i < size; i++) {
             for (int j = 1; j < size; j++) {
@@ -192,6 +201,7 @@ public class GameController {
     }
 
     private Transition moveRight() {
+        saveField();
         ParallelTransition par = new ParallelTransition();
         for (int i = 0; i < size; i++) {
             for (int j = size-2; j >= 0; j--) {
@@ -236,6 +246,7 @@ public class GameController {
     }
 
     private Transition moveUp() {
+        saveField();
         ParallelTransition par = new ParallelTransition();
         for (int i = 0; i < size; i++) {
             for (int j = 1; j < size; j++) {
@@ -280,6 +291,7 @@ public class GameController {
     }
 
     private Transition moveDown() {
+        saveField();
         ParallelTransition par = new ParallelTransition();
         for (int i = 0; i < size; i++) {
             for (int j = size-2; j >= 0; j--) {
@@ -377,6 +389,53 @@ public class GameController {
             }
         }
         return a;
+    }
+
+    @FXML
+    public void restart() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/menu.fxml"));
+        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root, 500, 600));
+    }
+
+    @FXML
+    public void undo() {
+        if(gameMode == 2 && !moveHistory.isEmpty()) {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    pane.getChildren().remove(tiles[i][j]);
+                }
+            }
+            tiles = moveHistory.get(0);
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if(tiles[i][j] != null) {
+                        tiles[i][j].setTranslateX(j*tileSize+tileOffset*j+tileOffset);
+                        tiles[i][j].setTranslateY(i*tileSize+tileOffset*i+tileOffset);
+                        changeTile(tiles[i][j], tiles[i][j].value).play();
+                        pane.getChildren().add(tiles[i][j]);
+                    }
+                }
+            }
+            for (int i = 0; i < moveHistory.size()-1; i++) {
+                moveHistory.set(i, moveHistory.get(i+1));
+            }
+            moveHistory.remove(moveHistory.size()-1);
+        }
+    }
+
+    private void saveField() {
+        Tile[][] newTiles = new Tile[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                Tile currTile = tiles[i][j];
+                if(currTile != null)
+                    newTiles[i][j] = new Tile((int)(currTile.getTranslateX()/tileSize),
+                            (int)(currTile.getTranslateY()/tileSize), currTile.value, size);
+            }
+        }
+        moveHistory.add(0, newTiles);
+        if(moveHistory.size() > 30)
+            moveHistory.remove(30);
     }
 
 }
